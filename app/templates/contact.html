@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+      <div class="jumbotron">
+        <!--<h1>Matt Healy</h1>-->
+        <p class="lead text-left">
+
+<form id="myform" class="text-left" method="post">
+  {{ form.hidden_tag() }}
+  <fieldset>
+    <legend>Contact Me</legend>
+    <div class="form-group">
+      <label for="email">Your name</label>
+      {{ form.name(class="form-control", placeholder="Enter your name", required="required") }}
+      {% for error in form.errors.name %}
+           <span style="color: red;">[{{error}}]</span>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      {{ form.email(class="form-control", placeholder="Enter your email address", required="required") }}
+      {% for error in form.errors.email %}
+           <span style="color: red;">[{{error}}]</span>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      {{ form.subject(class="form-control", placeholder="Subject", required="required") }}
+      {% for error in form.errors.subject %}
+           <span style="color: red;">[{{error}}]</span>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      {{ form.message(class="form-control", placeholder="Enter your message here", required="required", rows="3") }}
+      {% for error in form.errors.message %}
+           <span style="color: red;">[{{error}}]</span>
+      {% endfor %}
+    </div>
+    <button id="submit" type="submit" class="btn btn-default">Submit</button>
+  </fieldset>
+</form>
+
+	</p>
+      </div>
+
+{% endblock %}

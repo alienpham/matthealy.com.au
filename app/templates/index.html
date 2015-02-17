@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+      <div class="jumbotron">
+        <!--<h1>Matt Healy</h1>-->
+        <p class="lead text-justify">
+		Hi, my name's Matt and I'm a web developer from Perth, Western Australia. I'm currently a lead developer for <a href="http://www.fairfaxmedia.com.au/">Fairfax Digital</a>'s <a href="http://www.mydesktop.com.au">MyDesktop</a> Real Estate CRM Software. In my spare time I also make websites for my small business <a href="http://www.maadwebdesign.com.au">Maad Web Design</a>.
+	</p>
+        <p class="lead text-justify">
+		I've recently launched <a href="http://qrbyte.com">qrByte</a>, a tool allowing you to create QR codes for your apps, so that your users can scan one code and be redirected to the correct app store for their device! For a limited time, you can get free analytics on how often your codes are being scanned!
+	</p>
+        <p class="lead text-justify">
+		I graduated from Murdoch University in 2007 with a Bachelor of Science, Majoring in Computer Science and Mathematics &amp; Statistics.
+	</p>
+        <p class="lead text-justify">
+		Since graduating, I've been working as a web developer for MyDesktop. In those {{ years_working }} years I've gained experience developing large web based systems, maintaining server hardware, managing and mentoring junior developers, and much more.
+	</p>
+        <p><a class="btn btn-large btn-success" href="{{ url_for('main.contact') }}">Contact Me</a></p>
+      </div>
+
+{% endblock %}
