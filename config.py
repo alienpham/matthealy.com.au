@@ -11,8 +11,6 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    USERS_PER_PAGE = 10 
-    ENTRIES_PER_PAGE = 5 
     SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
     CSRF_ENABLED = True
     HEALY_MAIL_SUBJECT_PREFIX = 'healy.net.au:'

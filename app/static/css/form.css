@@ -25,5 +25,27 @@
     margin:0;
 }
 
-/* field label */
 
+.contact-form {
+    color: #000;
+    text-shadow: none;
+}
+
+
+.services {
+    color: #000;
+}
+
+.services > p {
+    text-align: justify;
+    text-shadow: none;
+}
+
+.services > ul > li {
+    text-align: justify;
+    text-shadow: none;
+}
+
+.services > p > a.link {
+    color: #999;
+}

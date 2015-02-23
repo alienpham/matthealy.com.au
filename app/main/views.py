@@ -30,3 +30,11 @@ def contact():
         return redirect(url_for('main.contact'))
 
     return render_template("contact.html", form=form)
+
+@main.route('/services', methods=['GET'])
+def services():
+    return render_template("services.html")
+
+@main.route('/about', methods=['GET'])
+def about():
+    return render_template("about.html")

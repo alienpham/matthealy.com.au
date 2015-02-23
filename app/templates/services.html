@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+          <div class="inner cover">
+           <div class="panel panel-body services">
+            <h1 class="cover-heading">Services</h1>
+            <p class="lead">
+                Ask me for advice on your next IT project. 
+            </p>
+            <p>
+                I have extensive experience in designing, creating and deploying web-based solutions for small to large businesses. My strength is in real estate systems, but I also have experience in developing solutions for the retail sector and for other small business entities. Some solutions I can offer your business include:
+            </p>
+                <ul>  
+                    <li>Website creation / update</li> 
+                    <li>Intranet systems</li> 
+                    <li>API design and implementation</li> 
+                </ul>  
+            <p style="text-align: center;">
+              <a href="{{ url_for('main.contact') }}" class="btn btn-lg btn-primary">Contact Me Now</a>
+            </p>
+           </div>
+          </div>
+
+{% endblock %}
