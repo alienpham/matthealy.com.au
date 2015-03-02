@@ -34,7 +34,3 @@ def contact():
 @main.route('/services', methods=['GET'])
 def services():
     return render_template("services.html")
-
-@main.route('/about', methods=['GET'])
-def about():
-    return render_template("about.html")

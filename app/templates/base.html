@@ -32,7 +32,6 @@
               <nav>
                 <ul class="nav masthead-nav">
                   <li{% if request.path == '/' %} class="active"{% endif %}><a href="{{ url_for('main.index') }}">Home</a></li>
-                  <li{% if request.path == '/about' %} class="active"{% endif %}><a href="{{ url_for('main.about') }}">About</a></li>
                   <li{% if request.path == '/services' %} class="active"{% endif %}><a href="{{ url_for('main.services') }}">Services</a></li>
                   <li{% if request.path == '/contact' %} class="active"{% endif %}><a href="{{ url_for('main.contact') }}">Contact</a></li>
                   <li><a class="webicon stackoverflow" href="http://stackoverflow.com/users/272193/matthewh">Stack Overflow</a></li>
