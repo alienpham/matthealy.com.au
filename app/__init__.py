@@ -1,5 +1,7 @@
 import os
 from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
 from flask_debugtoolbar import DebugToolbarExtension
@@ -12,6 +14,10 @@ mail = Mail()
 moment = Moment()
 toolbar = DebugToolbarExtension()
 
+db = SQLAlchemy()
+lm = LoginManager()
+lm.login_view = 'blog.login'
+
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
@@ -21,8 +27,14 @@ def create_app(config_name):
     moment.init_app(app)
     toolbar.init_app(app)
 
+    db.init_app(app)
+    lm.init_app(app)
+
     from main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    from blog import blog as blog_blueprint
+    app.register_blueprint(blog_blueprint, url_prefix='/blog')
 
     app.wsgi_app = ProxyFix(app.wsgi_app)
 

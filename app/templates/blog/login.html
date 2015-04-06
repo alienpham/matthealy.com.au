@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+
+{% block styles %}
+
+    {{ super() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="css/signin.css") }}" />
+
+{% endblock %}
+
+{% block content %}
+
+          <div class="inner cover">
+           <div class="panel panel-body blog">
+            <h1 class="cover-heading">Blog Admin</h1>
+
+      <form class="form-signin" method="post">
+        {{ form.hidden_tag() }}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        {{ form.email(placeholder="Email address", class="form-control") }}
+        {% for error in form.errors.email %}
+           <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        {{ form.password(placeholder="Password", class="form-control") }}
+        {% for error in form.errors.password %}
+           <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+        <div class="checkbox">
+          <label>
+            {{ form.remember_me }} Remember me
+          </label>
+        </div>
+        {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+      </form>
+
+           </div>
+          </div>
+
+{% endblock %}

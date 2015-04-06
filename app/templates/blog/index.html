@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+          <div class="inner cover">
+           <div class="panel panel-body blog">
+            <h1 class="cover-heading">Blog</h1>
+
+            {% for post in posts %}
+
+            <p>
+                Published: {{ post.timestamp }}
+            </p>
+            <p>
+                {{ post.title }}
+            </p>
+            <p>
+                {{ post.content | safe }}
+            </p>
+
+
+            <hr>
+
+            {% endfor %}
+
+           </div>
+          </div>
+
+{% endblock %}

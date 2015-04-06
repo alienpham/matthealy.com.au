@@ -49,3 +49,17 @@
 .services > p > a.link {
     color: #999;
 }
+
+.blog {
+    color: #000;
+}
+
+.blog > p {
+    text-align: justify;
+    text-shadow: none;
+}
+
+.blog > p > a {
+    color: #999;
+}
+
