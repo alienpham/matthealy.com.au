@@ -1,9 +1,9 @@
 from app import db
 from flask import url_for, current_app, request
 import hashlib
+from markdown import markdown
+import bleach
 from werkzeug.security import generate_password_hash, check_password_hash
-
-
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,5 +49,17 @@ class Post(db.Model):
     deleted = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    @staticmethod
+    def on_changed_content(target, value, oldvalue, initiator):
+        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+                        'h1', 'h2', 'h3', 'p']
+        target.content_html = bleach.linkify(bleach.clean(
+            markdown(value, output_format='html'),
+            tags=allowed_tags, strip=True))
+
     def __repr__(self):
         return '<Entry %r>' % (self.name)
+
+db.event.listen(Post.content, 'set', Post.on_changed_content)
+
