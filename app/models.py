@@ -41,8 +41,8 @@ class User(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    slug = db.Column(db.String(64))
-    title = db.Column(db.String(64))
+    slug = db.Column(db.String(128), index = True)
+    title = db.Column(db.String(128))
     content = db.Column(db.Text)
     content_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime)
@@ -59,7 +59,7 @@ class Post(db.Model):
             tags=allowed_tags, strip=True))
 
     def __repr__(self):
-        return '<Entry %r>' % (self.name)
+        return '<Post %r>' % (self.title)
 
 db.event.listen(Post.content, 'set', Post.on_changed_content)
 

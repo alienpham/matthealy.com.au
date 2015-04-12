@@ -5,14 +5,21 @@ from . import blog
 from ..models import User, Post
 from .. import db, lm
 from .forms import LoginForm, PostForm
-import markdown
+from slugify import slugify
 
-@blog.route('/', methods=['GET'])
+@blog.route('', methods=['GET'])
 def index():
 
     posts = Post.query.filter_by(deleted=None).all()
 
     return render_template("blog/index.html",title='Blog',posts=posts)
+
+@blog.route('/post/list', methods=['GET'])
+def archives():
+
+    posts = Post.query.filter_by(deleted=None).all()
+
+    return render_template("blog/archives.html",title='Posts',posts=posts)
 
 @blog.route('/post/add', methods=['GET','POST'])
 @login_required
@@ -21,9 +28,8 @@ def add_post():
     form = PostForm()
 
     if form.validate_on_submit():
-        content = form.content.data
-        content_html = markdown.markdown(form.content.data)
-        post = Post(user_id = g.user.id, title=form.title.data, content=content, content_html=content_html, timestamp = datetime.utcnow())
+        slug = slugify(form.title.data)
+        post = Post(user_id = g.user.id, title=form.title.data, content=form.content.data, timestamp = datetime.utcnow(), slug = slug)
         db.session.add(post)
         db.session.commit()
         flash('Your post was successfully published.')
@@ -31,12 +37,15 @@ def add_post():
 
     return render_template("blog/edit.html",title='Add Post',form=form)
 
-@blog.route('/post/<int:post_id>', methods=['GET'])
-def view_post(post_id):
+@blog.route('/post/<slug>', methods=['GET'])
+def view_post(slug):
 
-    posts = Post.query.filter_by(id = post_id, deleted=None).all()
+    posts = Post.query.filter_by(slug = slug, deleted=None).all()
 
-    return render_template("blog/post.html",posts=posts)
+    if not posts:
+        abort(404)
+
+    return render_template("blog/post.html",posts=posts,title='Post')
 
 @blog.route('/post/<int:post_id>/edit', methods=['GET','POST'])
 @login_required
@@ -50,14 +59,14 @@ def edit_post(post_id):
 
         post.title = form.title.data
         post.content = form.content.data
-        post.content_html = markdown.markdown(form.content.data)
+        post.slug = slugify(form.title.data)
 
         db.session.add(post)
         db.session.commit()
 
         flash('Your post was successfully updated.')
 
-        return redirect(url_for('blog.view_post', post_id = post.id))
+        return redirect(url_for('blog.view_post', slug = post.slug))
 
     post = Post.query.filter_by(id = post_id, user_id = g.user.id, deleted=None).first_or_404()
 

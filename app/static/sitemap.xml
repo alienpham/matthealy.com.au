@@ -9,4 +9,10 @@
   <url>
     <loc>http://www.healy.net.au/contact</loc> 
   </url>
+  <url>
+    <loc>http://www.healy.net.au/blog</loc> 
+  </url>
+  <url>
+    <loc>http://www.healy.net.au/blog/post/list</loc> 
+  </url>
 </urlset>

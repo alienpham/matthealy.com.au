@@ -29,8 +29,8 @@ def contact():
         flash('Thank you for your enquiry. I will endeavour to respond to you as soon as possible.')
         return redirect(url_for('main.contact'))
 
-    return render_template("contact.html", form=form)
+    return render_template("contact.html", form=form, title='Contact')
 
 @main.route('/services', methods=['GET'])
 def services():
-    return render_template("services.html")
+    return render_template("services.html", title='Services')

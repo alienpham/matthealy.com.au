@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
+    {% if current_user.is_authenticated() %}
+    <h2><a href="{{ url_for('blog.add_post') }}">[New Post]</a></h2>
+    {% endif %}
+
     {% include 'blog/_posts.html' %}
 
 {% endblock %}

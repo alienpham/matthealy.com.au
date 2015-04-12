@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
+    <meta name="description" content="Matt Healy - Web Developer - Perth, Western Australia - Blog">
+    <meta name="author" content="Matt Healy">
 
     {% if title %}
     <title>{{ title }} - Matt Healy - Web Developer - Perth, Western Australia</title>
@@ -61,7 +62,10 @@
                         <a href="{{ url_for('blog.index') }}">Home</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('main.index') }}">Main Site</a>
+                        <a href="{{ url_for('blog.archives') }}">Posts</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('main.index') }}">Consulting</a>
                     </li>
                     <li>
                         <a href="{{ url_for('main.contact') }}">Contact</a>
@@ -82,14 +86,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('{{ url_for('static', filename='kingspark.jpg') }}')">
+    <header class="intro-header" style="background-image: url('{{ url_for('static', filename='coogeebeach.jpg') }}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Matt's Blog</h1>
+                        <h1>Too techie</h1>
                         <hr class="small">
-                        <span class="subheading">Random thoughts on the world of programming</span>
+                        <span class="subheading"><strong>Thoughts on my world - programming, technology, entrepreneurship, sport and fatherhood</strong></span>
                     </div>
                 </div>
             </div>
