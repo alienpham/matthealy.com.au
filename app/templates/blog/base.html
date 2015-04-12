@@ -9,7 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    {% if title %}
+    <title>{{ title }} - Matt Healy - Web Developer - Perth, Western Australia</title>
+    {% else %}
+    <title>Matt Healy - Web Developer - Perth, Western Australia</title>
+    {% endif %}
 
     <!-- Bootstrap Core CSS -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
