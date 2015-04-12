@@ -10,13 +10,9 @@
 
 {% block content %}
 
-          <div class="inner cover">
-           <div class="panel panel-body blog">
-            <h1 class="cover-heading">Blog Admin</h1>
-
       <form class="form-signin" method="post">
         {{ form.hidden_tag() }}
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Admin Sign In</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         {{ form.email(placeholder="Email address", class="form-control") }}
         {% for error in form.errors.email %}
@@ -35,8 +31,5 @@
         </div>
         {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
       </form>
-
-           </div>
-          </div>
 
 {% endblock %}

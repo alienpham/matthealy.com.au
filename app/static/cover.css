@@ -163,3 +163,11 @@ body {
     width: 800px;
   }
 }
+
+.inner > ul > li > a {
+  color: #404040;
+}
+
+.inner > ul > li > a:hover {
+  color: #428bca;
+}

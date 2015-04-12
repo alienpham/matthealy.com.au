@@ -10,17 +10,9 @@ import markdown
 @blog.route('/', methods=['GET'])
 def index():
 
-    posts = g.user.posts.filter_by(deleted=None).all()
+    posts = Post.query.filter_by(deleted=None).all()
 
     return render_template("blog/index.html",title='Blog',posts=posts)
-
-@blog.route('/admin', methods=['GET'])
-@login_required
-def admin():
-
-    posts = g.user.posts.filter_by(deleted=None).all()
-
-    return render_template("blog/admin.html",title='Blog Admin',posts=posts)
 
 @blog.route('/post/add', methods=['GET','POST'])
 @login_required
@@ -29,8 +21,9 @@ def add_post():
     form = PostForm()
 
     if form.validate_on_submit():
-        content = markdown.markdown(form.content.data)
-        post = Post(user_id = g.user.id, title=form.title.data, content=content, timestamp = datetime.utcnow())
+        content = form.content.data
+        content_html = markdown.markdown(form.content.data)
+        post = Post(user_id = g.user.id, title=form.title.data, content=content, content_html=content_html, timestamp = datetime.utcnow())
         db.session.add(post)
         db.session.commit()
         flash('Your post was successfully published.')
@@ -41,9 +34,9 @@ def add_post():
 @blog.route('/post/<int:post_id>', methods=['GET'])
 def view_post(post_id):
 
-    post = Post.query.filter_by(id = post_id, deleted=None).first_or_404()
+    posts = Post.query.filter_by(id = post_id, deleted=None).all()
 
-    return render_template("blog/post.html",title=post.title,post=post)
+    return render_template("blog/post.html",posts=posts)
 
 @blog.route('/post/<int:post_id>/edit', methods=['GET','POST'])
 @login_required
@@ -56,8 +49,8 @@ def edit_post(post_id):
         post = Post.query.filter_by(id = post_id, user_id = g.user.id, deleted=None).first_or_404()
 
         post.title = form.title.data
-        content = markdown.markdown(form.content.data)
-        post.content = content
+        post.content = form.content.data
+        post.content_html = markdown.markdown(form.content.data)
 
         db.session.add(post)
         db.session.commit()
@@ -69,7 +62,7 @@ def edit_post(post_id):
     post = Post.query.filter_by(id = post_id, user_id = g.user.id, deleted=None).first_or_404()
 
     form.title.data = post.title
-    form.content.data = markdown.markup(post.content)
+    form.content.data = post.content
     form.id.data = post.id
 
     return render_template("blog/edit.html",title='Edit Post',post=post,form=form)
@@ -87,7 +80,7 @@ def login():
         flash('Invalid username or password.')
 
     if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('blog.admin'))
+        return redirect(url_for('blog.index'))
 
     if request.args.get('next'):
         session['next_url'] = request.args.get('next')

@@ -44,6 +44,7 @@ class Post(db.Model):
     slug = db.Column(db.String(64))
     title = db.Column(db.String(64))
     content = db.Column(db.Text)
+    content_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime)
     deleted = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
