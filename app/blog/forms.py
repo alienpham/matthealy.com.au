@@ -1,5 +1,6 @@
 from flask import g, current_app
 from flask.ext.wtf import Form
+from flask.ext.pagedown.fields import PageDownField
 from wtforms import TextField, HiddenField, TextAreaField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import Required, Optional, Email
 from ..models import User, Post
@@ -13,5 +14,5 @@ class LoginForm(Form):
 class PostForm(Form):
     id = HiddenField('post_id')
     title = TextField('title', validators=[Required()])
-    content = TextAreaField('content', validators=[Required()])
+    content = PageDownField("Start writing!", validators=[Required()])
     submit = SubmitField('Submit')
