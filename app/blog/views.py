@@ -34,7 +34,7 @@ def add_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post was successfully published.')
-        return redirect(url_for('blog.view_post', post_id = post.id))
+        return redirect(url_for('blog.view_post', slug = post.slug))
 
     return render_template("blog/edit.html",title='Add Post',form=form)
 
