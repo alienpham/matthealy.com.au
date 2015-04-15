@@ -6,18 +6,19 @@ from ..models import User, Post
 from .. import db, lm
 from .forms import LoginForm, PostForm
 from slugify import slugify
+from werkzeug.contrib.atom import AtomFeed
 
 @blog.route('', methods=['GET'])
 def index():
 
-    posts = Post.query.filter_by(deleted=None).all()
+    posts = Post.query.filter_by(deleted=None).order_by(Post.timestamp.desc()).all()
 
     return render_template("blog/index.html",title='Blog',posts=posts)
 
 @blog.route('/post/list', methods=['GET'])
 def archives():
 
-    posts = Post.query.filter_by(deleted=None).all()
+    posts = Post.query.filter_by(deleted=None).order_by(Post.timestamp.desc()).all()
 
     return render_template("blog/archives.html",title='Posts',posts=posts)
 
@@ -102,6 +103,21 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('blog.index'))
+
+@blog.route('/recent.atom')
+def recent_feed():
+    feed = AtomFeed('Recent Articles',
+                    feed_url=request.url, url=request.url_root)
+
+    posts = Post.query.filter_by(deleted=None).order_by(Post.timestamp.desc()).limit(15).all()
+
+    for post in posts:
+        feed.add(post.title, unicode(post.content_html),
+                 content_type='html',
+                 author=post.user.first_name,
+                 url=url_for('blog.view_post',slug = post.slug, _external=True),
+                 updated=post.timestamp)
+    return feed.get_response()
 
 @lm.user_loader
 def load_user(id):

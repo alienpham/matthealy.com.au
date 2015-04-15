@@ -16,6 +16,8 @@
     <title>Matt Healy - Web Developer - Perth, Western Australia</title>
     {% endif %}
 
+    <link href="{{ url_for('blog.recent_feed', _external=True) }}" rel="alternate" title="Recent Changes" type="application/atom+xml">
+
     <!-- Bootstrap Core CSS -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
