@@ -11,7 +11,7 @@ from werkzeug.contrib.atom import AtomFeed
 @blog.route('', methods=['GET'])
 def index():
 
-    posts = Post.query.filter_by(deleted=None).order_by(Post.timestamp.desc()).all()
+    posts = Post.query.filter_by(deleted=None).order_by(Post.timestamp.desc()).limit(5).all()
 
     return render_template("blog/index.html",title='Blog',posts=posts)
 
