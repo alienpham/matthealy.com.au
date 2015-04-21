@@ -11,6 +11,8 @@ from werkzeug.contrib.fixers import ProxyFix
 
 from config import config
 
+from htmlabbrev import HTMLAbbrev
+
 mail = Mail()
 moment = Moment()
 toolbar = DebugToolbarExtension()
@@ -41,6 +43,14 @@ def create_app(config_name):
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
 
     app.wsgi_app = ProxyFix(app.wsgi_app)
+
+    @app.template_filter()
+    def htmlabbrev(value, maxlen=150):
+        parser = HTMLAbbrev(maxlen)
+        parser.feed(value)
+        return parser.close()
+
+    app.jinja_env.filters['htmlabbrev'] = htmlabbrev
 
     if not app.debug:
         import logging
