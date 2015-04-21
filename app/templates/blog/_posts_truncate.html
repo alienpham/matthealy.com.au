@@ -12,7 +12,7 @@
                         <div><a href="{{ url_for('blog.edit_post', post_id=post.id) }}">[Edit]</a></div>
                     {% endif %}
 
-                    {{ post.content_html | htmlabbrev(300) | safe }}
+                    {{ post.content_html | htmlabbrev(900) | safe }}
                     <p class="post-meta"><a href="{{ url_for("blog.view_post", slug=post.slug) }}">... Read More</a></p>
 
                     <p class="post-meta">Posted on {{ moment(post.timestamp).format("Do MMM YYYY") }}</p>
