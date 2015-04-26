@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
 from . import blog
-from ..models import User, Post
+from ..models import User, Post, Tag
 from .. import db, lm
 from .forms import LoginForm, PostForm
 from slugify import slugify
@@ -29,24 +29,37 @@ def add_post():
     form = PostForm()
 
     if form.validate_on_submit():
+
         slug = slugify(form.title.data)
-        post = Post(user_id = g.user.id, title=form.title.data, content=form.content.data, timestamp = datetime.utcnow(), slug = slug)
+
+        post = Post(user_id = g.user.id, title=form.title.data,
+                    content=form.content.data, timestamp = datetime.utcnow(),
+                    slug = slug)
+
+        tags = [tag.strip() for tag in form.tags.data.split(',')]
+
+        for tag_name in tags:
+
+            if len(tag_name) == 0:
+                continue
+
+            tag_name = slugify(tag_name)
+            tag = Tag.query.filter_by(name=tag_name).first()
+
+            if tag is not None:
+                post.tags.append(tag)
+            else:
+                new_tag = Tag(name=tag_name)
+                db.session.add(new_tag)
+                post.tags.append(new_tag)
+
         db.session.add(post)
         db.session.commit()
+
         flash('Your post was successfully published.')
         return redirect(url_for('blog.view_post', slug = post.slug))
 
     return render_template("blog/edit.html",title='Add Post',form=form)
-
-@blog.route('/post/<slug>', methods=['GET'])
-def view_post(slug):
-
-    posts = Post.query.filter_by(slug = slug, deleted=None).all()
-
-    if not posts:
-        abort(404)
-
-    return render_template("blog/post.html",posts=posts,title='Post')
 
 @blog.route('/post/<int:post_id>/edit', methods=['GET','POST'])
 @login_required
@@ -61,6 +74,23 @@ def edit_post(post_id):
         post.title = form.title.data
         post.content = form.content.data
         post.slug = slugify(form.title.data)
+        post.tags = []
+
+        tags = [tag.strip() for tag in form.tags.data.split(',')]
+
+        for tag_name in tags:
+
+            if len(tag_name) == 0:
+                continue
+
+            tag_name = slugify(tag_name)
+            tag = Tag.query.filter_by(name=tag_name).first()
+            if tag is not None:
+                post.tags.append(tag)
+            else:
+                new_tag = Tag(name=tag_name)
+                db.session.add(new_tag)
+                post.tags.append(new_tag)
 
         db.session.add(post)
         db.session.commit()
@@ -74,8 +104,29 @@ def edit_post(post_id):
     form.title.data = post.title
     form.content.data = post.content
     form.id.data = post.id
+    form.tags.data = ','.join(str(tag.name) for tag in post.tags.all())
 
     return render_template("blog/edit.html",title='Edit Post',post=post,form=form)
+
+@blog.route('/post/tagged/<tag>', methods=['GET'])
+def view_tagged_posts(tag):
+
+    posts = Post.query.join(Post.tags).filter(Tag.name == tag).filter(Post.deleted==None).order_by(Post.timestamp.desc()).all()
+
+    if not posts:
+        abort(404)
+
+    return render_template("blog/post.html",posts=posts,title=tag)
+
+@blog.route('/post/<slug>', methods=['GET'])
+def view_post(slug):
+
+    posts = Post.query.filter_by(slug = slug, deleted=None).all()
+
+    if not posts:
+        abort(404)
+
+    return render_template("blog/post.html",posts=posts,title='Post')
 
 @blog.route('/login', methods=['GET','POST'])
 def login():

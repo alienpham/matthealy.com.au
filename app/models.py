@@ -39,6 +39,18 @@ class User(db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+
+    def __repr__(self):
+        return '<Tag %r>' % (self.name)
+
+posttags = db.Table('post_tag',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
+    db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+)
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     slug = db.Column(db.String(128), index = True)
@@ -48,6 +60,10 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime)
     deleted = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    tags = db.relationship('Tag',
+                           secondary = posttags,
+                           backref=db.backref('posts', lazy='dynamic'),
+                           lazy='dynamic')
 
     @staticmethod
     def on_changed_content(target, value, oldvalue, initiator):
@@ -65,4 +81,3 @@ class Post(db.Model):
         return '<Post %r>' % (self.title)
 
 db.event.listen(Post.content, 'set', Post.on_changed_content)
-

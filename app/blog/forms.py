@@ -15,4 +15,5 @@ class PostForm(Form):
     id = HiddenField('post_id')
     title = TextField('title', validators=[Required()])
     content = PageDownField("Start writing!", validators=[Required()])
+    tags = TextField('tags')
     submit = SubmitField('Submit')

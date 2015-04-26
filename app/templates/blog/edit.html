@@ -9,6 +9,9 @@
         <label for="title">Title</label>
         {{ form.title(placeholder="Title", class="form-control") }}
         {% for error in form.errors.title %}<div style="color: red;">[{{error}}]</div>{% endfor %}
+        <label for="title">Tags</label>
+        {{ form.tags(placeholder="Tags, separated by comma", class="form-control") }}
+        {% for error in form.errors.tags %}<div style="color: red;">[{{error}}]</div>{% endfor %}
         <label for="content">Post</label>
         {{ form.content(placeholder="Post Content", class="form-control", rows=10) }}
         {% for error in form.errors.content %}<div style="color: red;">[{{error}}]</div>{% endfor %}
