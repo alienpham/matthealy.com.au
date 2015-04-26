@@ -55,7 +55,7 @@ class Post(db.Model):
                         'em', 'i', 'img', 'li', 'ol', 'pre', 'strong', 'ul',
                         'h1', 'h2', 'h3', 'p']
         allowed_attributes = {
-                'img': ['src', 'alt', 'width', 'height']
+                'img': ['src', 'alt', 'width', 'height', 'class']
         }
         target.content_html = bleach.linkify(bleach.clean(
             markdown(value, output_format='html'),
