@@ -393,3 +393,17 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #0085a1;
 }
+
+.post-preview > p > img.float-left {
+  float: left;
+  margin-right: 15px;
+}
+
+.post-preview > p > img.float-right {
+  float: right;
+  margin-left: 15px;
+}
+
+.post-preview > p {
+  text-align: justify;
+}
