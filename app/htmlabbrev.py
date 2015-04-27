@@ -39,10 +39,10 @@ class HTMLAbbrev(HTMLParser):
         else:
             raise Exception('end tag %r does not match stack: %r' % (tag, self.stack))
 
-    def handle_startendtag(self, tag, attrs):
-        self.stack.append(tag)
-        attrs = ' '.join('%s="%s"' % (k, v) for k, v in attrs)
-        self.emit('<%s%s/>' % (tag, (' ' + attrs).rstrip()))
+    #def handle_startendtag(self, tag, attrs):
+    #    self.stack.append(tag)
+    #    attrs = ' '.join('%s="%s"' % (k, v) for k, v in attrs)
+    #    self.emit('<%s%s/>' % (tag, (' ' + attrs).rstrip()))
 
     def handle_data(self, data):
         for word in whitespace.split(data):
