@@ -13,7 +13,7 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
     CSRF_ENABLED = True
-    HEALY_MAIL_SUBJECT_PREFIX = 'healy.net.au:'
+    HEALY_MAIL_SUBJECT_PREFIX = 'matthealy.com.au:'
     HEALY_MAIL_SENDER = os.environ.get('HEALY_MAIL_SENDER')
     HEALY_ADMIN_EMAIL = os.environ.get('HEALY_ADMIN_EMAIL')
 
