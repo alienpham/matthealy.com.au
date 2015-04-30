@@ -4,6 +4,7 @@ import hashlib
 from markdown import markdown
 import bleach
 from werkzeug.security import generate_password_hash, check_password_hash
+from bs4 import BeautifulSoup
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -73,9 +74,12 @@ class Post(db.Model):
         allowed_attributes = {
                 'img': ['src', 'alt', 'width', 'height', 'class']
         }
-        target.content_html = bleach.linkify(bleach.clean(
+
+        soup = BeautifulSoup(bleach.linkify(bleach.clean(
             markdown(value, output_format='html'),
-            tags=allowed_tags, strip=True, attributes=allowed_attributes))
+            tags=allowed_tags, strip=True, attributes=allowed_attributes)))
+
+        target.content_html = soup.prettify()
 
     def __repr__(self):
         return '<Post %r>' % (self.title)
