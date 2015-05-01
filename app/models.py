@@ -72,14 +72,15 @@ class Post(db.Model):
                         'em', 'i', 'img', 'li', 'ol', 'pre', 'strong', 'ul',
                         'h1', 'h2', 'h3', 'p']
         allowed_attributes = {
-                'img': ['src', 'alt', 'width', 'height', 'class']
+                'img': ['src', 'alt', 'width', 'height', 'class'],
+                'a': ['href']
         }
 
-        soup = BeautifulSoup(bleach.linkify(bleach.clean(
+        soup = BeautifulSoup(bleach.clean(
             markdown(value, output_format='html'),
-            tags=allowed_tags, strip=True, attributes=allowed_attributes)))
+            tags=allowed_tags, strip=True, attributes=allowed_attributes))
 
-        target.content_html = soup.prettify()
+        target.content_html = str(soup)
 
     def __repr__(self):
         return '<Post %r>' % (self.title)
