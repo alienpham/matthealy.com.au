@@ -47,6 +47,9 @@ def generate_sitemap():
   </url>
   <url>
     <loc>http://www.matthealy.com.au/blog</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/list</loc>
   </url>""")
 
     posts = Post.query.filter_by(deleted=None).order_by(Post.timestamp.asc()).all()
