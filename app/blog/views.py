@@ -126,7 +126,7 @@ def view_post(slug):
     if not posts:
         abort(404)
 
-    return render_template("blog/post.html",posts=posts,title='Post')
+    return render_template("blog/post.html",posts=posts,title=posts[0].title)
 
 @blog.route('/login', methods=['GET','POST'])
 def login():
