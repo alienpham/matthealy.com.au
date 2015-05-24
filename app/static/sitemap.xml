@@ -31,6 +31,9 @@
     <loc>http://www.matthealy.com.au/blog/post/resume-fails</loc>
   </url>
   <url>
+    <loc>http://www.matthealy.com.au/blog/post/google-contacts-api-error</loc>
+  </url>
+  <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/career</loc>
   </url>
   <url>
@@ -59,5 +62,14 @@
   </url>
   <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/interviewing</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/google</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/google-contacts</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/api</loc>
   </url>
 </urlset>
