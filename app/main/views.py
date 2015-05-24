@@ -34,3 +34,7 @@ def contact():
 @main.route('/services', methods=['GET'])
 def services():
     return render_template("services.html", title='Services')
+
+@main.route('/portfolio', methods=['GET'])
+def portfolio():
+    return render_template("portfolio.html", title='Portfolio')
