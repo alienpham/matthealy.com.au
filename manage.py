@@ -43,6 +43,9 @@ def generate_sitemap():
     <loc>http://www.matthealy.com.au/services</loc>
   </url>
   <url>
+    <loc>http://www.matthealy.com.au/portfolio</loc>
+  </url>
+  <url>
     <loc>http://www.matthealy.com.au/contact</loc>
   </url>
   <url>
