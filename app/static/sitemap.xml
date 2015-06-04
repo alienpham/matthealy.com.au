@@ -34,6 +34,9 @@
     <loc>http://www.matthealy.com.au/blog/post/google-contacts-api-error</loc>
   </url>
   <url>
+    <loc>http://www.matthealy.com.au/blog/post/aws-primer</loc>
+  </url>
+  <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/career</loc>
   </url>
   <url>
@@ -71,5 +74,17 @@
   </url>
   <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/api</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/amazon-web-services</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/aws</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/beginning-aws</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/cloud-computing</loc>
   </url>
 </urlset>
