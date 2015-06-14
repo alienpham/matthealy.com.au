@@ -37,6 +37,9 @@
     <loc>http://www.matthealy.com.au/blog/post/aws-primer</loc>
   </url>
   <url>
+    <loc>http://www.matthealy.com.au/blog/post/server-gremlins</loc>
+  </url>
+  <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/career</loc>
   </url>
   <url>
@@ -86,5 +89,11 @@
   </url>
   <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/cloud-computing</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/perl</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/s3</loc>
   </url>
 </urlset>
