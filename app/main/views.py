@@ -19,12 +19,13 @@ def contact():
 
     if form.validate_on_submit():
 
+        phone = form.phone.data
         email = form.email.data        
         subject = form.subject.data        
         name = form.name.data        
         message = form.message.data        
 
-        send_email(current_app.config['HEALY_ADMIN_EMAIL'], subject,'mail/contact', email=email, name=name, message=message)
+        send_email(current_app.config['HEALY_ADMIN_EMAIL'], subject,'mail/contact', phone=phone, email=email, name=name, message=message)
 
         flash('Thank you for your enquiry. I will endeavour to respond to you as soon as possible.')
         return redirect(url_for('main.contact'))

@@ -2,6 +2,8 @@ You have received an enquiry from the Matt Healy website.
 
 Name: {{ name }}
 
+Phone: {{ phone }}
+
 Email: {{ email }}
 
 Enquiry: {{ message }}
