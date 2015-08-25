@@ -40,6 +40,9 @@
     <loc>http://www.matthealy.com.au/blog/post/server-gremlins</loc>
   </url>
   <url>
+    <loc>http://www.matthealy.com.au/blog/post/deploying-flask-to-amazon-web-services-ec2</loc>
+  </url>
+  <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/career</loc>
   </url>
   <url>
@@ -95,5 +98,14 @@
   </url>
   <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/s3</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/ec2</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/deployment</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/devops</loc>
   </url>
 </urlset>
