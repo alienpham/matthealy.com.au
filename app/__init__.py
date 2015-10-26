@@ -5,6 +5,7 @@ from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
 from flask.ext.pagedown import PageDown
+from flask_wtf.csrf import CsrfProtect
 from flask_debugtoolbar import DebugToolbarExtension
 
 from werkzeug.contrib.fixers import ProxyFix
@@ -22,6 +23,8 @@ db = SQLAlchemy()
 lm = LoginManager()
 lm.login_view = 'blog.login'
 
+csrf = CsrfProtect()
+
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
@@ -35,6 +38,7 @@ def create_app(config_name):
     lm.init_app(app)
 
     pagedown.init_app(app)
+    csrf.init_app(app)
 
     from main import main as main_blueprint
     app.register_blueprint(main_blueprint)

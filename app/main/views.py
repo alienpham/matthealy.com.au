@@ -1,16 +1,12 @@
 from flask import render_template, flash, redirect, url_for, request, g, current_app
-from datetime import date
 from . import main
 from .forms import ContactForm
 from ..email import send_email
-import humanize
 
-@main.route('/', methods=['GET'])
+@main.route('/', methods=['GET','POST'])
 def index():
-
-    years_working = humanize.apnumber(date.today().year - 2007)
-
-    return render_template("index.html", years_working=years_working)
+    form = ContactForm()
+    return render_template("index.html", form=form)
 
 @main.route('/contact', methods=['GET','POST'])
 def contact():
@@ -19,23 +15,15 @@ def contact():
 
     if form.validate_on_submit():
 
+        name = form.name.data        
         phone = form.phone.data
         email = form.email.data        
-        subject = form.subject.data        
-        name = form.name.data        
         message = form.message.data        
 
-        send_email(current_app.config['HEALY_ADMIN_EMAIL'], subject,'mail/contact', phone=phone, email=email, name=name, message=message)
+        send_email(current_app.config['HEALY_ADMIN_EMAIL'], 'Website Enquiry','mail/contact', phone=phone, email=email, name=name, message=message)
 
-        flash('Thank you for your enquiry. I will endeavour to respond to you as soon as possible.')
-        return redirect(url_for('main.contact'))
+        return '', 200
 
-    return render_template("contact.html", form=form, title='Contact')
-
-@main.route('/services', methods=['GET'])
-def services():
-    return render_template("services.html", title='Services')
-
-@main.route('/portfolio', methods=['GET'])
-def portfolio():
-    return render_template("portfolio.html", title='Portfolio')
+@main.route('/terms', methods=['GET'])
+def terms():
+    return render_template("terms.html")
