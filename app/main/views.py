@@ -24,6 +24,9 @@ def submit_contact():
 
         return '', 200
 
+    else:
+        return redirect(url_for('main.index'))
+
 @main.route('/terms', methods=['GET'])
 def terms():
     return render_template("terms.html")
