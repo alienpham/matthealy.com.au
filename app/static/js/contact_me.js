@@ -27,7 +27,7 @@ $(function() {
                  }
             });
             $.ajax({
-                url: "/contact",
+                url: "/submit_contact",
                 type: "POST",
                 data: {
                     name: name,

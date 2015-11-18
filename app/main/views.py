@@ -8,8 +8,8 @@ def index():
     form = ContactForm()
     return render_template("index.html", form=form)
 
-@main.route('/contact', methods=['GET','POST'])
-def contact():
+@main.route('/submit_contact', methods=['GET','POST'])
+def submit_contact():
 
     form = ContactForm()
 
