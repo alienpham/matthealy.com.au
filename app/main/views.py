@@ -5,8 +5,20 @@ from ..email import send_email
 
 @main.route('/', methods=['GET','POST'])
 def index():
+
     form = ContactForm()
-    return render_template("index.html", form=form)
+
+    languages = ['Python','Perl','PHP','SQL','HTML','CSS','Javascript']
+
+    frameworks = ['Flask','jQuery','Wordpress','Twitter Bootstrap']
+
+    software = ['MySQL','Linux','Apache','Nginx','Git','Sendmail','Swagger']
+
+    other = ['Amazon Web Services','Google Apps','Github','JSON','REST','SOAP','XML','DNS','SMTP','Domain Names']
+
+    return render_template("index.html", form=form, languages=languages, \
+                            frameworks=frameworks, softwares=software, \
+                            others=other)
 
 @main.route('/submit_contact', methods=['GET','POST'])
 def submit_contact():

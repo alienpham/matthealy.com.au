@@ -73,6 +73,42 @@
                     <p class="text-muted">I specialise in business-to-business integration programming. Connect your systems to the other web based systems that your business uses, and maximise efficiency in your business.</p>
                 </div>
             </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h4 class="service-heading">Skills</h4>
+                    <p class="text-muted">Below are some of the technologies I have direct experience with.</p>
+                    <br />
+                    <p><strong>Programming Languages:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for language in languages %}
+                        <li><span class="label label-primary">{{ language }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <p><strong>Frameworks:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for framework in frameworks %}
+                        <li><span class="label label-info">{{ framework }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <p><strong>Software:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for software in softwares %}
+                        <li><span class="label label-success">{{ software }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <p><strong>Other:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for other in others %}
+                        <li><span class="label label-default">{{ other }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 
