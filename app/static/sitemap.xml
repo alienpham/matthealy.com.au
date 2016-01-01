@@ -37,6 +37,9 @@
     <loc>http://www.matthealy.com.au/blog/post/using-supervisor-with-flask-and-gunicorn</loc>
   </url>
   <url>
+    <loc>http://www.matthealy.com.au/blog/post/foodloggr</loc>
+  </url>
+  <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/career</loc>
   </url>
   <url>
@@ -107,5 +110,14 @@
   </url>
   <url>
     <loc>http://www.matthealy.com.au/blog/post/tagged/gunicorn</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/foodloggr</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/health</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/tagged/product</loc>
   </url>
 </urlset>
