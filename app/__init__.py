@@ -1,12 +1,11 @@
 import os
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
-from flask.ext.pagedown import PageDown
 from flask_wtf.csrf import CsrfProtect
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_flatpages import FlatPages
+from flask_frozen import Freezer
 
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -17,15 +16,14 @@ from htmlabbrev import HTMLAbbrev
 mail = Mail()
 moment = Moment()
 toolbar = DebugToolbarExtension()
-pagedown = PageDown()
-
-db = SQLAlchemy()
-lm = LoginManager()
-lm.login_view = 'blog.login'
 
 csrf = CsrfProtect()
 
+pages = FlatPages()
+freezer = Freezer()
+
 def create_app(config_name):
+
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
@@ -34,11 +32,9 @@ def create_app(config_name):
     moment.init_app(app)
     toolbar.init_app(app)
 
-    db.init_app(app)
-    lm.init_app(app)
-
-    pagedown.init_app(app)
     csrf.init_app(app)
+    pages.init_app(app)
+    freezer.init_app(app)
 
     from main import main as main_blueprint
     app.register_blueprint(main_blueprint)

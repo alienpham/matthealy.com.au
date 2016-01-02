@@ -1,6 +1,7 @@
-from flask import render_template, flash, redirect, url_for, request, g, current_app
+from flask import render_template, flash, redirect, url_for, request, g, current_app, Response
 from . import main
 from .forms import ContactForm
+from .. import pages
 from ..email import send_email
 
 @main.route('/', methods=['GET','POST'])
@@ -20,25 +21,76 @@ def index():
                             frameworks=frameworks, softwares=software, \
                             others=other)
 
-@main.route('/submit_contact', methods=['GET','POST'])
-def submit_contact():
+@main.route('/about/', methods=['GET'])
+def about():
+    return render_template("about.html")
 
-    form = ContactForm()
+@main.route('/portfolio/', methods=['GET'])
+def portfolio():
+    return render_template("portfolio.html")
 
-    if form.validate_on_submit():
+@main.route('/contact/', methods=['GET'])
+def contact():
+    return render_template("contact.html")
 
-        name = form.name.data        
-        phone = form.phone.data
-        email = form.email.data        
-        message = form.message.data        
+@main.route('/services/', methods=['GET'])
+def services():
+    return render_template("services.html")
 
-        send_email(current_app.config['HEALY_ADMIN_EMAIL'], 'Website Enquiry','mail/contact', phone=phone, email=email, name=name, message=message)
-
-        return '', 200
-
-    else:
-        return redirect(url_for('main.index'))
-
-@main.route('/terms', methods=['GET'])
+@main.route('/terms/', methods=['GET'])
 def terms():
     return render_template("terms.html")
+
+@main.route('/sitemap.xml', methods=['GET'])
+def sitemapxml():
+
+    sitemap = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://www.matthealy.com.au/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/about/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/contact/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/portfolio/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/services/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/terms/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/</loc>
+  </url>
+  <url>
+    <loc>http://www.matthealy.com.au/blog/post/list/</loc>
+  </url>"""
+
+    tags = []
+    posts = (p for p in pages)
+    posts = sorted(posts, key=lambda p: p.meta['timestamp'])
+
+    for post in posts:
+        for tag in post.meta['tags']:
+            tags.append(tag)
+        sitemap = sitemap + "\n  <url>\n    <loc>http://www.matthealy.com.au/blog/post/" + post.meta['slug'] + "/</loc>\n  </url>"
+
+    for tag in tags:
+        sitemap = sitemap + "\n  <url>\n    <loc>http://www.matthealy.com.au/blog/post/tagged/" + tag + "/</loc>\n  </url>"
+  
+    sitemap = sitemap + "\n</urlset>"
+
+    return Response(sitemap, mimetype='text/xml')
+
+@main.route('/robots.txt', methods=['GET'])
+def robots():
+
+    robots = """User-agent: *
+Allow: /"""
+
+    return Response(robots, mimetype='text/plain')

@@ -8,3 +8,4 @@ test.db
 *.pyc
 app/*.pyc
 tmp/*
+app/build

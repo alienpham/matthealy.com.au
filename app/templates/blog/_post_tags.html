@@ -1,9 +1,7 @@
                     {% if post.tags %}
-                    {% if post.tags.count() > 0 %}
                         <p class="post-meta">Tagged under:
                         {% for tag in post.tags %}
-                            <a href="{{ url_for('blog.view_tagged_posts', tag=tag.name)}}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                            <a href="{{ url_for('blog.view_tagged_posts', tag=tag)}}">{{ tag }}</a>{% if not loop.last %},{% endif %}
                         {% endfor %}
                         </p>
-                    {% endif %}
                     {% endif %}

@@ -2,25 +2,18 @@
     {% for post in posts %}
 
                 <a name="top">&nbsp;</a>
-                <div class="post-preview">
-                    <a href="{{ url_for("blog.view_post", slug=post.slug) }}">
-                        <h2 class="post-title">
-                            {{ post.title }}
-                        </h2>
-                    </a>
 
-                    {% if current_user.is_authenticated() %}
-                        <div><a href="{{ url_for('blog.edit_post', post_id=post.id) }}">[Edit]</a></div>
-                    {% endif %}
-
-                    {{ post.content_html | safe }}
-
+                <div class="col-lg-12 text-justify">
+                    <div class="text-center">
+                    <h2>
+                        <a href="{{ url_for("blog.view_post", slug=post.slug) }}">{{ post.title }}</a>
+                        <br>
+                        <small>{{ moment(post.timestamp).format("Do MMM YYYY") }}</small>
+                    </h2>
+                    </div>
+                    {{ post.html | safe }}
                     {% include "blog/_post_tags.html" %}
-
-                    <p class="post-meta">Posted on {{ moment(post.timestamp).format("Do MMM YYYY") }}</p>
-
+                    <hr>
                 </div>
-
-                <hr>
 
     {% endfor %}

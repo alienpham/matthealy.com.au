@@ -16,6 +16,7 @@ class Config:
     HEALY_MAIL_SUBJECT_PREFIX = 'matthealy.com.au:'
     HEALY_MAIL_SENDER = os.environ.get('HEALY_MAIL_SENDER')
     HEALY_ADMIN_EMAIL = os.environ.get('HEALY_ADMIN_EMAIL')
+    FLATPAGES_EXTENSION = '.md'
 
     @staticmethod
     def init_app(app):
@@ -26,6 +27,7 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app-dev.db')
     DEBUG_TB_INTERCEPT_REDIRECTS = False
+    FLATPAGES_AUTO_RELOAD = True
 
 class TestingConfig(Config):
     TESTING = True
