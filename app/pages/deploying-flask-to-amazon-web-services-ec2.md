@@ -18,7 +18,7 @@ Let's choose "Amazon Linux" as our base machine image.
 <img src="/static/img/blog/flask-tutorial-2.png" width="750" />
 </div>
 
-Now you can choose your machine type - to keep things within the free tier let's choose a *tc.micro* instance. All new Amazon Web Services customers can use the "free tier" to run certain services for 12 months at no cost.
+Now you can choose your machine type - to keep things within the free tier let's choose a *t2.micro* instance. All new Amazon Web Services customers can use the "free tier" to run certain services for 12 months at no cost.
 
 <div class="text-center">
 <img src="/static/img/blog/flask-tutorial-3.png" />
