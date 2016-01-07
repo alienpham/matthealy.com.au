@@ -46,7 +46,7 @@ def view_post(slug):
 def recent_feed():
 
     feed = AtomFeed('Recent Articles',
-                    feed_url=request.url, url=request.url_root)
+                    feed_url='http://www.matthealy.com.au/blog/recent.atom', url='http://www.matthealy.com.au')
 
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
@@ -54,7 +54,7 @@ def recent_feed():
         feed.add(post.meta['title'], unicode(post.html),
                  content_type='html',
                  author=post.meta['author'],
-                 url=url_for('blog.view_post',slug = post.meta['slug'], _external=True),
+                 url='http://www.matthealy.com.au/blog/post/'+post.meta['slug']+'/',
                  updated=post.meta['timestamp'])
 
     return feed.get_response()
