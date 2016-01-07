@@ -94,3 +94,8 @@ def robots():
 Allow: /"""
 
     return Response(robots, mimetype='text/plain')
+
+# This route is only used for Flask-Frozen to generate a static error.html page
+@main.route('/error.html', methods=['GET'])
+def error_static_page():
+    return render_template("404.html")
