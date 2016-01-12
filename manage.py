@@ -24,7 +24,7 @@ pages = FlatPages(app)
 freezer = Freezer(app)
 
 def make_shell_context():
-    return dict(app=app, db=db, pages=pages)
+    return dict(app=app, pages=pages)
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
 
