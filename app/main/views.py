@@ -4,6 +4,10 @@ from .forms import ContactForm
 from .. import pages
 from ..email import send_email
 
+@main.context_processor
+def inject_debug():
+    return dict(debug = current_app.config['DEBUG'])
+
 @main.route('/', methods=['GET','POST'])
 def index():
 

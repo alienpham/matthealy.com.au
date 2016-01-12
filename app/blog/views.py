@@ -5,6 +5,10 @@ from .. import pages
 from slugify import slugify
 from werkzeug.contrib.atom import AtomFeed
 
+@blog.context_processor
+def inject_debug():
+    return dict(debug = current_app.config['DEBUG'])
+
 @blog.route('/', methods=['GET'])
 def index():
 
