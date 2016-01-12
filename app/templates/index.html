@@ -65,4 +65,39 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <p><strong>Programming/Markup Languages:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for language in languages %}
+                        <li><span class="label label-primary">{{ language }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <p><strong>Frameworks:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for framework in frameworks %}
+                        <li><span class="label label-info">{{ framework }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <p><strong>Software:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for software in softwares %}
+                        <li><span class="label label-success">{{ software }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <p><strong>Other:</strong>
+                    <ul class="list-inline" style="font-size: 18px; line-height: 36px">
+                        {% for other in others %}
+                        <li><span class="label label-default">{{ other }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+
 {% endblock %}
