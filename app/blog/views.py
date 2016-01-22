@@ -49,8 +49,8 @@ def view_post(slug):
 @blog.route('/recent.atom')
 def recent_feed():
 
-    feed = AtomFeed('Recent Articles',
-                    feed_url='http://www.matthealy.com.au/blog/recent.atom', url='http://www.matthealy.com.au')
+    feed = AtomFeed('Matt Healy Web Solutions - Recent Articles',
+                    feed_url='https://www.matthealy.com.au/blog/recent.atom', url='https://www.matthealy.com.au')
 
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
@@ -58,7 +58,7 @@ def recent_feed():
         feed.add(post.meta['title'], unicode(post.html),
                  content_type='html',
                  author=post.meta['author'],
-                 url='http://www.matthealy.com.au/blog/post/'+post.meta['slug']+'/',
+                 url='https://www.matthealy.com.au/blog/post/'+post.meta['slug']+'/',
                  updated=post.meta['timestamp'])
 
     return feed.get_response()

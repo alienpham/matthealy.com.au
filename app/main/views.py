@@ -51,28 +51,28 @@ def sitemapxml():
     sitemap = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://www.matthealy.com.au/</loc>
+    <loc>https://www.matthealy.com.au/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/about/</loc>
+    <loc>https://www.matthealy.com.au/about/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/contact/</loc>
+    <loc>https://www.matthealy.com.au/contact/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/portfolio/</loc>
+    <loc>https://www.matthealy.com.au/portfolio/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/services/</loc>
+    <loc>https://www.matthealy.com.au/services/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/terms/</loc>
+    <loc>https://www.matthealy.com.au/terms/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/blog/</loc>
+    <loc>https://www.matthealy.com.au/blog/</loc>
   </url>
   <url>
-    <loc>http://www.matthealy.com.au/blog/post/list/</loc>
+    <loc>https://www.matthealy.com.au/blog/post/list/</loc>
   </url>"""
 
     tags = []
@@ -82,10 +82,10 @@ def sitemapxml():
     for post in posts:
         for tag in post.meta['tags']:
             tags.append(tag)
-        sitemap = sitemap + "\n  <url>\n    <loc>http://www.matthealy.com.au/blog/post/" + post.meta['slug'] + "/</loc>\n  </url>"
+        sitemap = sitemap + "\n  <url>\n    <loc>https://www.matthealy.com.au/blog/post/" + post.meta['slug'] + "/</loc>\n  </url>"
 
     for tag in tags:
-        sitemap = sitemap + "\n  <url>\n    <loc>http://www.matthealy.com.au/blog/post/tagged/" + tag + "/</loc>\n  </url>"
+        sitemap = sitemap + "\n  <url>\n    <loc>https://www.matthealy.com.au/blog/post/tagged/" + tag + "/</loc>\n  </url>"
   
     sitemap = sitemap + "\n</urlset>"
 
