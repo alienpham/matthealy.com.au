@@ -9,3 +9,4 @@ test.db
 app/*.pyc
 tmp/*
 app/build
+deploy.sh
