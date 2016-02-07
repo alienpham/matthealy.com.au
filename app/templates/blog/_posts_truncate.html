@@ -9,7 +9,7 @@
                         <small>{{ moment(post.timestamp).format("Do MMM YYYY") }}</small>
                     </h2>
                     </div>
-                    <p>{{ post.html | htmlabbrev(900) | safe }}</p>
+                    <p>{{ post.html | htmltruncate(900) | safe }}</p>
                     <a href="{{ url_for("blog.view_post", slug=post.slug) }}" class="btn btn-default btn-lg">Read More</a>
                     {% include "blog/_post_tags.html" %}
                     <hr>

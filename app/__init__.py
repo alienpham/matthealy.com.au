@@ -22,6 +22,11 @@ csrf = CsrfProtect()
 pages = FlatPages()
 freezer = Freezer()
 
+def htmltruncate(value, maxlen=150):
+    parser = HTMLAbbrev(maxlen)
+    parser.feed(value)
+    return parser.close()
+
 def create_app(config_name):
 
     app = Flask(__name__)
@@ -44,13 +49,7 @@ def create_app(config_name):
 
     app.wsgi_app = ProxyFix(app.wsgi_app)
 
-    @app.template_filter()
-    def htmlabbrev(value, maxlen=150):
-        parser = HTMLAbbrev(maxlen)
-        parser.feed(value)
-        return parser.close()
-
-    app.jinja_env.filters['htmlabbrev'] = htmlabbrev
+    app.jinja_env.filters['htmltruncate'] = htmltruncate
 
     if not app.debug:
         import logging

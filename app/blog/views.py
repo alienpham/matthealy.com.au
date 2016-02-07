@@ -2,6 +2,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from datetime import datetime, timedelta
 from . import blog
 from .. import pages
+from .. import htmltruncate
 from slugify import slugify
 from werkzeug.contrib.atom import AtomFeed
 
@@ -55,7 +56,13 @@ def recent_feed():
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
     for post in latest[:15]:
-        feed.add(post.meta['title'], unicode(post.html),
+
+        html = htmltruncate(post.html,900) + \
+               '<a href="' + \
+               'https://www.matthealy.com.au/blog/post/' + post.meta['slug'] + '/' + \
+               '">Read More</a>'
+
+        feed.add(post.meta['title'], unicode(html),
                  content_type='html',
                  author=post.meta['author'],
                  url='https://www.matthealy.com.au/blog/post/'+post.meta['slug']+'/',
