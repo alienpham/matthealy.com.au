@@ -4,18 +4,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     BASEDIR = basedir
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    MAIL_SERVER = os.environ.get('MAIL_SERVER')
-    MAIL_PORT = os.environ.get('MAIL_PORT')
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
-    CSRF_ENABLED = True
-    HEALY_MAIL_SUBJECT_PREFIX = 'matthealy.com.au:'
-    HEALY_MAIL_SENDER = os.environ.get('HEALY_MAIL_SENDER')
-    HEALY_ADMIN_EMAIL = os.environ.get('HEALY_ADMIN_EMAIL')
     FLATPAGES_EXTENSION = '.md'
     FLATPAGES_AUTO_RELOAD = True
 
@@ -25,16 +13,13 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_ECHO = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app-dev.db')
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app-test.db')
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    pass
 
 config = {
     'development': DevelopmentConfig,

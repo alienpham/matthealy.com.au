@@ -1,9 +1,7 @@
-from flask import render_template, flash, redirect, session, url_for, request, g, current_app, Response, abort
-from datetime import datetime, timedelta
+from flask import render_template, current_app, abort
 from . import blog
 from .. import pages
 from .. import htmltruncate
-from slugify import slugify
 from werkzeug.contrib.atom import AtomFeed
 
 @blog.context_processor

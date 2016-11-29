@@ -1,8 +1,6 @@
-from flask import render_template, flash, redirect, url_for, request, g, current_app, Response
+from flask import render_template, current_app, Response
 from . import main
-from .forms import ContactForm
 from .. import pages
-from ..email import send_email
 
 @main.context_processor
 def inject_debug():
@@ -10,8 +8,6 @@ def inject_debug():
 
 @main.route('/', methods=['GET','POST'])
 def index():
-
-    form = ContactForm()
 
     languages = ['Python','Perl','PHP','SQL','HTML','CSS','Javascript']
 
@@ -21,7 +17,7 @@ def index():
 
     other = ['Amazon Web Services','Google Apps','Github','JSON','REST','SOAP','XML','DNS','SMTP','Domain Names']
 
-    return render_template("index.html", form=form, languages=languages, \
+    return render_template("index.html", languages=languages, \
                             frameworks=frameworks, softwares=software, \
                             others=other)
 

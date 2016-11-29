@@ -1,24 +1,18 @@
 import os
 from flask import Flask
-from flask.ext.mail import Mail
-from flask.ext.moment import Moment
-from flask_wtf.csrf import CsrfProtect
+from flask_moment import Moment
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 
 from werkzeug.contrib.fixers import ProxyFix
 
-from config import config
+from config import config, basedir
 
 from htmlabbrev import HTMLAbbrev
 
-mail = Mail()
 moment = Moment()
 toolbar = DebugToolbarExtension()
-
-csrf = CsrfProtect()
-
 pages = FlatPages()
 freezer = Freezer()
 
@@ -33,11 +27,8 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
-    mail.init_app(app)
     moment.init_app(app)
     toolbar.init_app(app)
-
-    csrf.init_app(app)
     pages.init_app(app)
     freezer.init_app(app)
 
@@ -51,6 +42,9 @@ def create_app(config_name):
 
     app.jinja_env.filters['htmltruncate'] = htmltruncate
 
+    if not os.path.exists(os.path.join(basedir, 'tmp')):
+        os.makedirs(os.path.join(basedir, 'tmp'))
+
     if not app.debug:
         import logging
         from logging.handlers import RotatingFileHandler, SMTPHandler
@@ -61,23 +55,5 @@ def create_app(config_name):
         file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
         app.logger.info('healy startup')
-
-        credentials = None
-        secure = None
-
-        if app.config['MAIL_USERNAME'] is not None:
-            credentials = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-            if app.config['MAIL_USE_TLS'] is True:
-                secure = ()
-
-        mail_handler = SMTPHandler(
-            mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-            fromaddr=app.config['HEALY_MAIL_SENDER'],
-            toaddrs=app.config['HEALY_ADMIN_EMAIL'],
-            subject=app.config['HEALY_MAIL_SUBJECT_PREFIX'] + ' Application Error',
-            credentials=credentials)
-
-        mail_handler.setLevel(logging.ERROR)
-        app.logger.addHandler(mail_handler)
 
     return app
